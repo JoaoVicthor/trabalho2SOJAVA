@@ -19,6 +19,7 @@ public class Pote {
     int ligacoes = 0;
     Random rdm = new Random();
     Cachorro cachorro = null;
+    boolean dormindo;
     
     public Pote(){
         moedas = 4;
@@ -51,7 +52,7 @@ public class Pote {
         return moedas;
     }
     
-    public void putCachorro(Cachorro cao){
+    public synchronized void putCachorro(Cachorro cao){
         cachorro = cao;
     }
     
@@ -90,6 +91,16 @@ public class Pote {
     void addMoeda() {
         moedas++;
     }
+
+    public boolean isDormindo() {
+        return dormindo;
+    }
+
+    public void setDormindo(boolean dormindo) {
+        this.dormindo = dormindo;
+    }
+    
+    
     
     
 }

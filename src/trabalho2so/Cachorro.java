@@ -54,7 +54,7 @@ public class Cachorro extends Thread{
         }
     }
     
-    public void pegarMoedas(){
+    public synchronized void pegarMoedas(){
         String retorno = toString() + " ";
         int take = poteAtual.takeMoedas();
         moedas += take;
@@ -63,7 +63,9 @@ public class Cachorro extends Thread{
             try {
                 retorno += " e dormiu.";
                 System.out.println(retorno);
-                sleep(6000);
+                poteAtual.setDormindo(true);
+                wait(6000);
+                poteAtual.setDormindo(false);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -72,7 +74,7 @@ public class Cachorro extends Thread{
             try {
                 retorno += " e pegou " + take+ " moedas.";
                 System.out.println(retorno);
-                sleep(100);
+                wait(100);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -80,8 +82,8 @@ public class Cachorro extends Thread{
         
     }
     
-    private void getLigacao(){
-        
+    public boolean tahDormindo(){
+        return poteAtual.isDormindo();
     }
     
     private synchronized void ocuparPote(){

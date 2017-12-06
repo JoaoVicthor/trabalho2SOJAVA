@@ -29,9 +29,11 @@ public class CachorroVermelho extends Thread {
                     pote.addMoeda();
                     System.out.println("Cachorro Vermelho adicionou 1 moeda ao " + pote.toString());
                 }
-                if (pote.isOcupado()){
-                    pote.getCachorro().interrupt();
-                    System.out.println("Cachorro Vermelho acordou o " + pote.getCachorro().toString());
+                if (pote.isOcupado()) {
+                    if (pote.getCachorro().tahDormindo()) {
+                        pote.getCachorro().interrupt();
+                        System.out.println("Cachorro Vermelho acordou o " + pote.getCachorro().toString());
+                    }
                 }
             }
             try {
