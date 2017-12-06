@@ -41,7 +41,11 @@ public class Cachorro extends Thread{
         dono.addMoedas(moedas);
         if(dono.getMoedas() < 40){
             dono.createCachorroDois();
-            this.stop();
+            try {
+                this.finalize();
+            } catch (Throwable ex) {
+                Logger.getLogger(Cachorro.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else{
             System.out.println("FIM DE JOGO!");
